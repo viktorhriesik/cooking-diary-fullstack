@@ -13,6 +13,10 @@ const EditAccount = ()=>{
     const [wrongData,setWrongData] = useState(false);
 
     useEffect(()=>{
+        if(localStorage.getItem('user_id')==null){
+            navigateTo('/login');
+        }    
+
         const checkLogIn=async()=>{
 
             if(localStorage.getItem('user_id')){

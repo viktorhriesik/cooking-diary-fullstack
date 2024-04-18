@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import mainImg from '../assets/main.jpg'
 import logoImg from '../assets/logo.png'
 import "../index.css"
@@ -13,20 +13,42 @@ const AddRecipe = () =>{
 
     const [recipeName,setRecipeName] = useState('');
     const [shortDesc,setShortDesc] = useState('');
-    const [ingridients,setIngridients] = useState('');
+    const [ingridients,setIngridients] = useState('sad');
     const [instructions,setInstructions] = useState('');
     const [prepTime,setPreptime] = useState('');
     const [recipeImg,setRecipeImg] = useState();
     const [wrongData,setWrongData] = useState(false);
+
+    const [divCount, setDivCount] = useState(2);
+
+    const addDiv = () => {
+    setDivCount(divCount + 1); };
+
 
     const handleFileChange = event => {
         //console.log(event.target.files[0]['name']);
         setRecipeImg(event.target.files[0]['name']);
       };
 
-    const addNewRecipe=(event)=>{
-        event.preventDefault();
+      useEffect(() => {
         
+        if(!localStorage.getItem['user_id']){
+            navigateTo('/login');
+        }   
+        
+        console.log("Ingredient state changed:", ingridients);
+        const ingredientInputs = document.querySelectorAll('.ingredient');
+        const mergedValues = Array.from(ingredientInputs).map(input => input.value).join('\n');
+        setIngridients(mergedValues);
+        console.log("SVE:",mergedValues);
+      }, [ingridients]);
+
+    const addNewRecipe=async(event)=>{
+        event.preventDefault();
+
+        
+        //setIngridients(mergedValues);
+
         let data = {
             user_id:localStorage.getItem('user_id'),
             recipeName:recipeName,
@@ -46,6 +68,7 @@ const AddRecipe = () =>{
 
     }
 
+
     return(
     <>
         <NavBar/>
@@ -61,7 +84,12 @@ const AddRecipe = () =>{
                 <label htmlFor="">Short Description</label><br/>
                 <textarea type="text"  rows="5" required={true} onChange={(e) => setShortDesc(e.target.value)} /><br/>
                 <label htmlFor="" >Ingridiets: </label><br/>
-                <textarea type="text" rows="7" required={true} onChange={(e) => setIngridients(e.target.value)} /><br/>
+                    <div className="ingridients">
+                            {Array.from({ length: divCount }, (_, index) => (
+                            <input key={index} type="text" className="ingredient" required={true} onChange={(e)=>{setIngridients(e.target.value)}}/>
+                            ))}    
+                    </div>
+                    <button className="add-ing" onClick={addDiv}>Add</button>    
                 <label>Istructions: </label><br/>
                 <textarea type="Text" rows="10" required={true} onChange={(e) => setInstructions(e.target.value)} /><br />
                 <label>Preparation Time: </label><br/>

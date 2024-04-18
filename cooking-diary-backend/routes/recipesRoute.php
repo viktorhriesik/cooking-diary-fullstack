@@ -26,7 +26,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $recipe->addRecipe($user_id,$recipeName, $shortDesc, $ingridients, $instructions,$prepTime,$imgPaht);
     
     }
-    
+
+    //like recipe
+    if(str_ends_with($requestUri,"/like-recipe")){
+        
+        $data = json_decode(file_get_contents('php://input'), true);
+        //var_dump($data);
+
+        $recipe_id = $data['recipe_id'];
+
+        $recipe->addLike($recipe_id);
+}    
 
 }
 if ($_SERVER['REQUEST_METHOD'] === 'GET'){

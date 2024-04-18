@@ -8,8 +8,11 @@ session_start();
 require_once 'config/Config.php';
 require_once 'models/User.php';
 require_once 'models/Recipe.php';
+require_once 'models/Comment.php';
+
 require_once 'routes/recipesRoute.php';
 require_once 'routes/userRoute.php';
+require_once 'routes/commentRoute.php';
 
 if($_SERVER['REQUEST_METHOD']=="POST"){
 

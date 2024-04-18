@@ -55,7 +55,6 @@ class Recipe{
         }
     }
 
-
     public function getAllRecipeData($recipeId){
         $sql ='SELECT * FROM recipes WHERE recipe_id = ? ;';
         $run = $this->conn->prepare($sql);
@@ -82,6 +81,14 @@ class Recipe{
         } else {
             echo "0 results";
         }
+    }
+
+    public function addLike($recipeId){
+        $sql =' UPDATE recipes SET likes = likes + 1 WHERE recipe_id=?;';
+        $run = $this->conn->prepare($sql);
+        $run->bind_param("s",$recipeId);
+        $run->execute();
+        $result = $run->get_result();
     }
 }
 

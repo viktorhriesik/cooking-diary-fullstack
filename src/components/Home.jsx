@@ -17,6 +17,11 @@ const Home = () =>{
     const [recipes, setRecipe] = useState([]);
     
     useEffect(()=>{
+
+        if(localStorage.getItem('user_id')==null){
+            navigateTo('/login');
+        }   
+        
         const checkNumOfRecipes=async()=>{
 
             const response = await fetch('http://localhost/cooking-diary-backend/index.php/recipes');
@@ -53,7 +58,7 @@ const Home = () =>{
             <div className="all-recipes"> 
                 <ul className="row">
                     {recipes.map((recipe, index) => (
-                    <li id={recipe.recipe_id.toString()} className="recipe" onClick={loadRecipe}>
+                    <li id={recipe.recipe_id.toString()} key={index} className="recipe" onClick={loadRecipe}>
                         <img src={`/src/img/${recipe.imgPath}`} alt="img" />
                         <h3>{recipe.recipeName}</h3>
                         <p>{recipe.shortDesc}</p>

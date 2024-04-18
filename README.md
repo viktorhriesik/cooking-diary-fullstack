@@ -7,6 +7,7 @@ This is a full-stack cooking app built with React for the frontend and PHP for t
 - User Authentication: Users can register an account and login securely.
 - Recipe Management: Users can add new recipes, view existing recipes, and interact with recipes through comments.
 - Comment System: Users can leave comments on recipes to share their thoughts and feedback.
+- Likes System: Users can like a recipe.
 - Responsive Design: The app is designed to work seamlessly on both desktop and mobile devices.
 
 ## Technologies Used

@@ -1,6 +1,6 @@
 ## Full Stack Cooking App
 
-This is a full-stack cooking app built with React for the frontend and PHP for the backend. It allows users to register, login, add recipes, and interact with other users through comments.
+This is a full-stack cooking app built with React for the frontend and PHP for the backend. It allows users to register, login, add recipes, and interact with other users through comments and likes.
 
 ## Features
 
